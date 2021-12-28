@@ -8,7 +8,9 @@
 # We'll come back to this packages soon later on. I put this 
 # command here since it's good practice to list all your used 
 # packages at the beginning of a script
-library(tidyverse)
+# library(tidyverse)
+library(dplyr)
+library(ggplot2)
 
 # Basic R syntax ----
 # What does this command do?
@@ -77,13 +79,6 @@ PlantGrowth %>%
          diff_group = weight - mean(weight),
          diff_sq = (weight - mean(weight))^2)
 
-# or...
-
-
-
-
-
-
 # Let's review the two most common syntax paradigms in R
 # (This is kind of like different dialects of the same language,
 #  some things are the same or very similar but there are key
@@ -105,29 +100,39 @@ PlantGrowth$weight %>%
 # 2 - Aesthetics - "mapping" variables onto scales
 # scales: x, y, color, size, shape, linetype
 # 3 - Geometry - how the plot will look
+p <- ggplot(PlantGrowth, aes(x = group, y = weight))
+p
 
 # box plot
+p +
+  geom_boxplot()
+
+
+# Raw data
+p +
+  geom_point()
+
+# "dot plot"
+p +
+  geom_jitter(width = 0.2, shape = 16, alpha = 0.75)
 
 # "dot plot" (mean +/- 1SD)
-
-
+p +
+  geom_jitter(width = 0.2, shape = 16, alpha = 0.75) +
+  stat_summary(fun.data = mean_sdl, fun.args = list(mult = 1), col = "red")
 
 
 # 3. Inferential Statistics ----
 # first step: define a linear model
-# ~ means "described by"
-
-
-
-
+# ~ means "described by": y ~ x
+plant_lm <- lm(weight ~ group, data = PlantGrowth)
+plant_lm
+summary(plant_lm)
 
 # 1-way ANOVA
-
-
-
-
+anova(plant_lm)
 
 # For all pair-wise comparisons use:
-
+TukeyHSD(aov(weight ~ group, data = PlantGrowth))
 
 
