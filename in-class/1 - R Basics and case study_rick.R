@@ -1,4 +1,4 @@
-# 2.1.1 - R Basics basics and case study
+# R Basics basics and case study
 # Misk Academy Data Science Immersive, 2020
 
 # Always begin your R scripts with a descriptive header
