@@ -100,6 +100,7 @@ PlantGrowth$weight %>%
 # 2 - Aesthetics - "mapping" variables onto scales
 # scales: x, y, color, size, shape, linetype
 # 3 - Geometry - how the plot will look
+
 p <- ggplot(PlantGrowth, aes(x = group, y = weight))
 p
 
