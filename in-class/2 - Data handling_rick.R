@@ -144,17 +144,38 @@ sum(foo2) + foo2 # Transformation
 
 # Exercise:
 # Calculate y = 1.12x − 0.4 for xx
-B0 <- -0.4
-B1 <- 1.12
+B0 <- -0.4 # b, y-intercept
+B1 <- 1.12 # m, slope
 
 B0 + B1 * xx 
 
-myOLS <- function(x, y_int = -0.4, slope = 1.12) {
-  y_hat <- y_int + slope * x
-  return(y_hat)
+myOLS <- function(x, B0 = -0.4, B1 = 1.12) {
+  B0 + B1 * x
 }
 
+myOLS(xx)
 myOLS(xx, 10, -10^7)
+
+m2 <- c(0, 1.12, 6, 2, 24, -3, -12)
+
+# Old school way - "Apply" family of functions
+lapply(m2, function(x) myOLS(xx, B1 = x))
+# lapply(m2, ??? myOLS(xx, B1 = x))
+
+# New school way - tidyvers packages: purrr
+# map() - We want the output of the function
+# walk() - We want the side-effects of the functions, e.g.
+library(purrr)
+m2 %>% 
+  map(~ myOLS(xx, B1 = .))
+
+for (i in m2) {
+  print(B0 + i * xx)
+}  
+  
+B0 + 0 * xx 
+B0 + 1.12 * xx 
+B0 + 6 * xx
 
 # Part 2: Objects (nouns) ----
 # Anything that exists is an object
