@@ -1,6 +1,8 @@
 # R Basics basics and case study
 # Misk Academy Data Science Immersive, 2020
 
+
+source("in-class/1a - descriptive stats_rick.R")
 # Always begin your R scripts with a descriptive header
 
 # Load packages ----
@@ -43,7 +45,7 @@ PlantGrowth <- as_tibble(PlantGrowth) # convert this to a "tibble" (more on this
 mean(PlantGrowth$weight)
 
 # Would this work on the group column? NO
-mean(PlantGrowth$group)
+# mean(PlantGrowth$group)
 
 # Group-wise statistics
 # Here, using functions from dplyr, a part of the Tidyverse

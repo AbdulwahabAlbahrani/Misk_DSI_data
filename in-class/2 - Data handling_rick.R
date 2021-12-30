@@ -1,6 +1,8 @@
 # Data handling
 # Misk Academy Data Science Immersive, 2020
 
+source("in-class/1b - R Basics and case study_rick.R")
+
 # Part 1: Functions (i.e. "verbs") ----
 # Everything that happens, is because of a function
 
@@ -91,7 +93,7 @@ seq(1, 10, 1)
 
 # we can rename objects
 hello <- foo1
-rm(foo1)
+# rm(foo1)
 
 # We can change the default number of sig digits displayed in the console
 # options(digits = 3)
@@ -134,7 +136,7 @@ sum(foo2) + foo2 # Transformation
 1:3 + foo2 # 2 9 16 20 27 34
 
 # FUNDAMENTAL CONCEPT: VECTOR RECYCLING ----
-1:4 + foo2
+# 1:4 + foo2
 
 # Now we're starting to see different kinds of feedback from R
 # There are 3 types of messages:
@@ -235,7 +237,7 @@ mean(test, na.rm = TRUE)
 
 # Lists - 1-dimensional, heterogeneous ----
 library(tidyverse)
-martian_tb <- read_tsv("data/martians.txt")
+# martian_tb <- read_tsv("data/martians.txt")
 plant_lm <- lm(weight ~ group, data = PlantGrowth)
 plant_anova <- anova(plant_lm)
 typeof(plant_lm)
@@ -243,18 +245,20 @@ typeof(plant_lm)
 # how many elements:
 length(plant_lm)
 length(foo1) # also works for vectors
-data("PlantGrowth")
+# data("PlantGrowth")
 
 # attributes (meta data)
 attributes(plant_lm)
 # 13 named elements
 # attributes(PlantGrowth)
+plant_lm$coefficients
 
 # use common "accessor" functions for attributes
 names(plant_lm)
 # attributes(plant_lm)$names
 str(plant_lm)
 plant_lm
+print(plant_lm)
 length(plant_lm)
 # Anything that's named can be called with $
 plant_lm$coefficients # a 3-element named dbl (numeric) vector
@@ -288,7 +292,7 @@ summary(PlantGrowth) # summarise each column in a "dataframe"
 class(PlantGrowth)
 # A special class of type list...
 typeof(PlantGrowth)
-
+typeof(myOLS)
 # look at a tibble
 typeof(martian_tb)
 class(martian_tb)
@@ -350,19 +354,3 @@ nrow(foo_df)
 
 # How about just the number of columns? 
 ncol(foo_df)
-
-
-library(RColorBrewer)
-
-library("Biobase")
-
-
-library(datasets)
-data(faithful)
-faithful_lm <- lm(eruptions ~ waiting, data = faithful)
-faithful_lm$coefficients
-predict(faithful_lm, data.frame(waiting <- 45))
-
-aa <- as.array(1:4)
-class(aa)
-typeof(aa)
